@@ -1,14 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{9BB4484D-3E1A-4CEB-A4C0-45D81BF0695B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{5289F937-F39D-4B42-849C-C6F8EBD9D650}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.catalog.api", "services\catalog\shockz.msa.catalog.api\shockz.msa.catalog.api.csproj", "{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5289F937-F39D-4B42-849C-C6F8EBD9D650} = {9BB4484D-3E1A-4CEB-A4C0-45D81BF0695B}
+		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4} = {5289F937-F39D-4B42-849C-C6F8EBD9D650}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}
 	EndGlobalSection
 EndGlobal
