@@ -7,12 +7,12 @@ namespace shockz.msa.catalog.api.Controllers
 {
   [Route("api/v1/[controller]")]
   [ApiController]
-  public class CatalogController : ControllerBase
+  public class ProductController : ControllerBase
   {
     private readonly IProductRepository _productRepository;
-    private readonly ILogger<CatalogController> _logger;
+    private readonly ILogger<ProductController> _logger;
 
-    public CatalogController(IProductRepository productRepository, ILogger<CatalogController> logger)
+    public ProductController(IProductRepository productRepository, ILogger<ProductController> logger)
     {
       _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
       _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -76,6 +76,13 @@ namespace shockz.msa.catalog.api.Controllers
       // use IActionResult because of only return bool
       
       return Ok(await _productRepository.DeleteProduct(id));
+    }
+
+    [HttpGet]
+    [Route("[action]")]
+    public async Task<ActionResult<string>> GetObjectId()
+    {
+      return Ok(await ironPot42.Extensions.Generator.MongoObjectId());
     }
   }
 }

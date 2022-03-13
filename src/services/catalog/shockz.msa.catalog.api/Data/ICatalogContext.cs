@@ -6,5 +6,6 @@ namespace shockz.msa.catalog.api.Data
   public interface ICatalogContext
   {
     IMongoCollection<Product> Products { get; }
+    IMongoCollection<Price> Prices { get; }
   }
 }
