@@ -4,14 +4,27 @@ services:
   catalogdb:
     image: mongo
 
+  mongoclient:
+    image: mongoclient/mongoclient
+
+  basketdb:
+    image: redis:alpine
+
+  portainer:
+    image: portainer/portainer-ce
+    
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: services/catalog/shockz.msa.catalog.api/Dockerfile
 
-  mongoclient:
-    image: mongoclient/mongoclient
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: services/basket/shockz.msa.basket.api/Dockerfile
 
 volumes:
   mongo_data:
+  portainer_data:
