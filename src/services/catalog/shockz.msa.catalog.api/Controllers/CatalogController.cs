@@ -42,7 +42,7 @@ namespace shockz.msa.catalog.api.Controllers
       return Ok(product);
     }
 
-    [Route("{action}/{category}", Name = "GetProductByCategory")]
+    [Route("[action]/{category}", Name = "GetProductByCategory")]
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
@@ -60,10 +60,21 @@ namespace shockz.msa.catalog.api.Controllers
       return CreatedAtRoute("GetProduct", new { id = product.Id }, GetProductById);
     }
 
+    [HttpPut]
+    [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> UpdateProduct([FromBody] Product product)
+    {
+      // use IActionResult because of only return bool
+
+      return Ok(await _productRepository.UpdateProduct(product));
+    }
+
     [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteProduct(string id)
     {
+      // use IActionResult because of only return bool
+      
       return Ok(await _productRepository.DeleteProduct(id));
     }
   }

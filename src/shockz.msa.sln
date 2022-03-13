@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{5289
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.catalog.api", "services\catalog\shockz.msa.catalog.api\shockz.msa.catalog.api.csproj", "{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{29D9C151-446B-42CD-AC1E-3ACFE65CC27A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F3CE0E-B0CB-42C9-ACFE-1E9A6DCB49D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D9C151-446B-42CD-AC1E-3ACFE65CC27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D9C151-446B-42CD-AC1E-3ACFE65CC27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D9C151-446B-42CD-AC1E-3ACFE65CC27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D9C151-446B-42CD-AC1E-3ACFE65CC27A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
