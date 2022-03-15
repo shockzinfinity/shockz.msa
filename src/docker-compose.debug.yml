@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   catalogdb:
+    image: mongo
     container_name: catalogdb
     restart: "no"
     ports:
@@ -10,12 +11,14 @@ services:
       - mongo_data:/data/db
 
   basketdb:
+    image: redis:alpine
     container_name: basketdb
     restart: "no"
     ports:
       - "6380:6379"
 
   discountdb:
+    image: postgres
     container_name: discountdb
     environment:
       - POSTGRES_USER=admin
@@ -28,6 +31,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
 
   mongoclient:
+    image: mongoclient/mongoclient
     container_name: mongoclient
     ports:
       - "3000:3000"
@@ -35,6 +39,7 @@ services:
       - catalogdb
 
   portainer:
+    image: portainer/portainer-ce
     container_name: portainer
     restart: "unless-stopped"
     ports:
@@ -45,6 +50,7 @@ services:
       - portainer_data:/data
 
   pgadmin:
+    image: dpage/pgadmin4
     container_name: pgadmin
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@shockz.io
@@ -55,35 +61,8 @@ services:
     volumes:
       - pgadmin_data:/root/.pgadmin
 
-  catalog.api:
-    container_name: catalog.api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=mongodb://catalogdb:27017" # inner containers env, use 27017 port
-    depends_on:
-      - catalogdb
-    ports:
-      - "8000:80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-
-  basket.api:
-    container_name: basket.api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "CacheSettings:ConnectionString=basketdb:6379" # inner containers env, use 6379 port
-    depends_on:
-      - basketdb
-    ports:
-      - "8001:80"
-
-  discount.api:
-    container_name: discount.api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User id=admin;Password=P@ssw0rd;"
-    depends_on:
-      - discountdb
-    ports:
-      - "8002:80"
-
+volumes:
+  mongo_data:
+  portainer_data:
+  postgres_data:
+  pgadmin_data:

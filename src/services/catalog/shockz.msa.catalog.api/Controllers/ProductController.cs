@@ -33,8 +33,7 @@ namespace shockz.msa.catalog.api.Controllers
     public async Task<ActionResult<Product>> GetProductById(string id)
     {
       var product = await _productRepository.GetProduct(id);
-      if (product == null)
-      {
+      if (product == null) {
         _logger.LogError($"Product with Id:{id}, not found");
         return NotFound();
       }
@@ -74,7 +73,7 @@ namespace shockz.msa.catalog.api.Controllers
     public async Task<IActionResult> DeleteProduct(string id)
     {
       // use IActionResult because of only return bool
-      
+
       return Ok(await _productRepository.DeleteProduct(id));
     }
 

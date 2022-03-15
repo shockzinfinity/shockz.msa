@@ -4,14 +4,20 @@ services:
   catalogdb:
     image: mongo
 
-  mongoclient:
-    image: mongoclient/mongoclient
-
   basketdb:
     image: redis:alpine
 
+  discountdb:
+    image: postgres
+
+  mongoclient:
+    image: mongoclient/mongoclient
+
   portainer:
     image: portainer/portainer-ce
+
+  pgadmin:
+    image: dpage/pgadmin4
     
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
@@ -25,6 +31,14 @@ services:
       context: .
       dockerfile: services/basket/shockz.msa.basket.api/Dockerfile
 
+  discount.api:
+    image: ${DOCKER_REGISTRY-}discountapi
+    build:
+      context: .
+      dockerfile: services/discount/shockz.msa.discount.api/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
+  postgres_data:
+  pgadmin_data:

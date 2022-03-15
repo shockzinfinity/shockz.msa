@@ -17,8 +17,7 @@
       get
       {
         decimal totalPrice = 0;
-        foreach (ShoppingCartItem item in Items)
-        {
+        foreach (ShoppingCartItem item in Items) {
           totalPrice += item.Price * item.Quantity;
         }
 

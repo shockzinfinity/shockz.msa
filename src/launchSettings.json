@@ -2,13 +2,17 @@
   "profiles": {
     "Docker Compose": {
       "commandName": "DockerCompose",
-      "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "catalog.api",
-      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
       "commandVersion": "1.0",
       "serviceActions": {
         "catalog.api": "StartDebugging",
-        "catalogdb": "StartWithoutDebugging"
+        "catalogdb": "StartWithoutDebugging",
+        "basket.api": "StartDebugging",
+        "basketdb": "StartWithoutDebugging",
+        "discount.api": "StartDebugging",
+        "discountdb": "StartWithoutDebugging",
+        "mongoclient": "StartWithoutDebugging",
+        "pgadmin": "StartWithoutDebugging",
+        "portainer": "StartWithoutDebugging"
       }
     }
   }

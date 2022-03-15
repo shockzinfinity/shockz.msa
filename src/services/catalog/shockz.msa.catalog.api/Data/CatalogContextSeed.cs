@@ -8,14 +8,12 @@ namespace shockz.msa.catalog.api.Data
     public static void SeedData(IMongoCollection<Product> productCollection, IMongoCollection<Price> priceCollection)
     {
       bool existProduct = productCollection.Find(p => true).Any();
-      if (!existProduct)
-      {
+      if (!existProduct) {
         productCollection.InsertManyAsync(GetPreconfiguredProducts());
       }
 
       bool existPrice = priceCollection.Find(p => true).Any();
-      if (!existPrice)
-      {
+      if (!existPrice) {
         priceCollection.InsertManyAsync(GetPreconfiguredPrices());
       }
     }
