@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.discount.api", "shockz.msa.discount.api\shockz.msa.discount.api.csproj", "{D9C1328D-A0B9-4F6B-B776-07D271EC6C9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.discount.grpc", "shockz.msa.discount.grpc\shockz.msa.discount.grpc.csproj", "{6C18E8A2-0BD3-4596-A2F8-86350310C7C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D9C1328D-A0B9-4F6B-B776-07D271EC6C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9C1328D-A0B9-4F6B-B776-07D271EC6C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9C1328D-A0B9-4F6B-B776-07D271EC6C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C18E8A2-0BD3-4596-A2F8-86350310C7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C18E8A2-0BD3-4596-A2F8-86350310C7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C18E8A2-0BD3-4596-A2F8-86350310C7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C18E8A2-0BD3-4596-A2F8-86350310C7C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
