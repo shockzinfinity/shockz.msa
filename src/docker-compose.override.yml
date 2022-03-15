@@ -13,7 +13,7 @@ services:
     container_name: basketdb
     restart: "no"
     ports:
-      - "6380:6379"
+      - "6379:6379"
 
   discountdb:
     container_name: discountdb
@@ -72,6 +72,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=basketdb:6379" # inner containers env, use 6379 port
+      - "GrpcSettings:DiscountUrl=http://discount.grpc"
     depends_on:
       - basketdb
     ports:
@@ -87,3 +88,12 @@ services:
     ports:
       - "8002:80"
 
+  discount.grpc:
+    container_name: discount.grpc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User id=admin;Password=P@ssw0rd;"
+    depends_on:
+      - discountdb
+    ports:
+      - "8003:80"

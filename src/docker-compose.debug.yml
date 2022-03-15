@@ -15,7 +15,7 @@ services:
     container_name: basketdb
     restart: "no"
     ports:
-      - "6380:6379"
+      - "6379:6379"
 
   discountdb:
     image: postgres

@@ -16,13 +16,18 @@
     {
       get
       {
-        decimal totalPrice = 0;
-        foreach (ShoppingCartItem item in Items) {
-          totalPrice += item.Price * item.Quantity;
-        }
-
-        return totalPrice;
+        return RecalculatePrices();
       }
+    }
+
+    private decimal RecalculatePrices()
+    {
+      decimal total = 0;
+      foreach (var item in Items) {
+        total += item.Price * item.Quantity;
+      }
+
+      return total;
     }
   }
 }
