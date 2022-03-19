@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ordering.api", "shockz.msa.ordering.api\shockz.msa.ordering.api.csproj", "{417BCE0D-BE9B-453C-A4B9-79F052D53392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ordering.infrastructure", "shockz.msa.ordering.infrastructure\shockz.msa.ordering.infrastructure.csproj", "{DED70A00-BA96-4769-B873-630EAC32FCC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ordering.domain", "shockz.msa.ordering.domain\shockz.msa.ordering.domain.csproj", "{5EE9C41B-BC55-410A-9700-00BA8768F54C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ordering.application", "shockz.msa.ordering.application\shockz.msa.ordering.application.csproj", "{4AB24258-2132-4131-88DB-50AF218AE142}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{417BCE0D-BE9B-453C-A4B9-79F052D53392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417BCE0D-BE9B-453C-A4B9-79F052D53392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417BCE0D-BE9B-453C-A4B9-79F052D53392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417BCE0D-BE9B-453C-A4B9-79F052D53392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED70A00-BA96-4769-B873-630EAC32FCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED70A00-BA96-4769-B873-630EAC32FCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED70A00-BA96-4769-B873-630EAC32FCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED70A00-BA96-4769-B873-630EAC32FCC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EE9C41B-BC55-410A-9700-00BA8768F54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EE9C41B-BC55-410A-9700-00BA8768F54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EE9C41B-BC55-410A-9700-00BA8768F54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EE9C41B-BC55-410A-9700-00BA8768F54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB24258-2132-4131-88DB-50AF218AE142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB24258-2132-4131-88DB-50AF218AE142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB24258-2132-4131-88DB-50AF218AE142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB24258-2132-4131-88DB-50AF218AE142}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
