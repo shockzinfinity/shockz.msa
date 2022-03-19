@@ -1,6 +1,5 @@
 using shockz.msa.discount.api.Extensions;
 using shockz.msa.discount.api.Repositories;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 

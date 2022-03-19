@@ -41,7 +41,7 @@ namespace shockz.msa.ordering.application.Features.Orders.Commands.CheckoutOrder
       {
         To = "temp@temp.com",
         Subject = "Order was created",
-        Body = $"Order was created by {order.Id}"
+        Body = $"Order was created: {order.Id}" // TODO: check service lifetime
       };
 
       try {
