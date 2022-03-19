@@ -18,7 +18,7 @@ namespace shockz.msa.ordering.infrastructure.Persistence
     {
       return new List<Order>
       {
-        new Order() { UserName = "shockz", FirstName = "Jun", LastName = "Yu", EmailAddress = "temp@temp.com", AddressLine = "Seoul", Country = "Korea", TotalPrice = 350000 }
+        new Order { UserName = "shockz", FirstName = "Jun", LastName = "Yu", EmailAddress = "temp@temp.com", AddressLine = "Mapo-gu", Country = "Korea", State = "Seoul", ZipCode = "03936", TotalPrice = 350000 }
       };
     }
   }

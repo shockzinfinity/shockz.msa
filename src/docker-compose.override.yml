@@ -27,6 +27,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
+  orderdb:
+    container_name: orderdb
+    environment:
+      - SA_PASSWORD=P@ssw0rd
+      - ACCEPT_EULA=Y
+      - "ConnectionStrings:OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=P@ssw0rd;"
+    restart: "no"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/
+
   mongoclient:
     container_name: mongoclient
     ports:

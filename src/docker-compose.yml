@@ -10,6 +10,9 @@ services:
   discountdb:
     image: postgres
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
   mongoclient:
     image: mongoclient/mongoclient
 
@@ -48,3 +51,4 @@ volumes:
   portainer_data:
   postgres_data:
   pgadmin_data:
+  mssql_data:

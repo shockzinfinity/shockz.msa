@@ -30,6 +30,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: orderdb
+    environment:
+      - SA_PASSWORD=P@ssw0rd
+      - ACCEPT_EULA=Y
+    restart: "no"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/
+
   mongoclient:
     image: mongoclient/mongoclient
     container_name: mongoclient
@@ -66,3 +78,4 @@ volumes:
   portainer_data:
   postgres_data:
   pgadmin_data:
+  mssql_data:
