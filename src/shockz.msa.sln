@@ -36,6 +36,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ordering.applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ordering.infrastructure", "services\ordering\shockz.msa.ordering.infrastructure\shockz.msa.ordering.infrastructure.csproj", "{ACE2E824-FD9E-4B83-9C72-DC87050C065D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "buildingBlocks", "buildingBlocks", "{4925C668-661F-473A-B90F-B44A872BD9A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.eventBus.messages", "buildingBlocks\shockz.msa.eventBus.messages\shockz.msa.eventBus.messages.csproj", "{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +82,10 @@ Global
 		{ACE2E824-FD9E-4B83-9C72-DC87050C065D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACE2E824-FD9E-4B83-9C72-DC87050C065D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACE2E824-FD9E-4B83-9C72-DC87050C065D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +103,7 @@ Global
 		{6BAB8999-EFAA-40BC-BAFC-A482D8325A90} = {D92548E1-385D-4796-A6E2-1DEEEFBBD967}
 		{257A8E6F-456B-4C1E-BF21-2B4EB0967E0A} = {D92548E1-385D-4796-A6E2-1DEEEFBBD967}
 		{ACE2E824-FD9E-4B83-9C72-DC87050C065D} = {D92548E1-385D-4796-A6E2-1DEEEFBBD967}
+		{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D} = {4925C668-661F-473A-B90F-B44A872BD9A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}

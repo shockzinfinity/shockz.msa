@@ -10,10 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.44.0" />
+    <PackageReference Include="Masstransit" Version="8.0.0" />
+    <PackageReference Include="Masstransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="Masstransit.RabbitMQ" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\shockz.msa.eventBus.messages\shockz.msa.eventBus.messages.csproj" />
   </ItemGroup>
 
   <ItemGroup>

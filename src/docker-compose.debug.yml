@@ -42,6 +42,14 @@ services:
     volumes:
       - mssql_data:/var/opt/
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    restart: "no"
+    ports:
+      - "5672:5672"
+      - "15672:15672" # id/pw: guest/guest
+
   mongoclient:
     image: mongoclient/mongoclient
     container_name: mongoclient
