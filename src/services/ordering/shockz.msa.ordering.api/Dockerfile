@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["services/ordering/shockz.msa.ordering.api/shockz.msa.ordering.api.csproj", "services/ordering/shockz.msa.ordering.api/"]
+COPY ["buildingBlocks/shockz.msa.eventBus.messages/shockz.msa.eventBus.messages.csproj", "buildingBlocks/shockz.msa.eventBus.messages/"]
 COPY ["services/ordering/shockz.msa.ordering.infrastructure/shockz.msa.ordering.infrastructure.csproj", "services/ordering/shockz.msa.ordering.infrastructure/"]
 COPY ["services/ordering/shockz.msa.ordering.application/shockz.msa.ordering.application.csproj", "services/ordering/shockz.msa.ordering.application/"]
 COPY ["services/ordering/shockz.msa.ordering.domain/shockz.msa.ordering.domain.csproj", "services/ordering/shockz.msa.ordering.domain/"]

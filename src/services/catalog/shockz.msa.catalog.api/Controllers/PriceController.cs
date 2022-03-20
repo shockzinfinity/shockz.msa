@@ -18,7 +18,7 @@ namespace shockz.msa.catalog.api.Controllers
       _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [HttpGet]
+    [HttpGet("{productId:length(24)}")]
     [ProducesResponseType(typeof(IEnumerable<Price>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<Price>>> GetPrices(string productId)
     {

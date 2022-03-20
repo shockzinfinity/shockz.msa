@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["services/basket/shockz.msa.basket.api/shockz.msa.basket.api.csproj", "services/basket/shockz.msa.basket.api/"]
+COPY ["buildingBlocks/shockz.msa.eventBus.messages/shockz.msa.eventBus.messages.csproj", "buildingBlocks/shockz.msa.eventBus.messages/"]
 RUN dotnet restore "services/basket/shockz.msa.basket.api/shockz.msa.basket.api.csproj"
 COPY . .
 WORKDIR "/src/services/basket/shockz.msa.basket.api"
