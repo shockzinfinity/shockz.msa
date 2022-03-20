@@ -1,3 +1,6 @@
+using MassTransit;
+using shockz.msa.eventBus.messages.Common;
+using shockz.msa.ordering.api.EventBusConsumer;
 using shockz.msa.ordering.api.Extensions;
 using shockz.msa.ordering.application;
 using shockz.msa.ordering.infrastructure;
@@ -8,6 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.AddMassTransit(config =>
+{
+  config.AddConsumer<BasketCheckoutConsumer>(); // ** IMPORTANT **
+  config.UsingRabbitMq((ctx, cfg) =>
+  {
+    cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+    cfg.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueue, c =>
+    {
+      c.ConfigureConsumer<BasketCheckoutConsumer>(ctx); // ** IMPORTANT **
+    });
+  });
+});
+
+// General configuration
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<BasketCheckoutConsumer>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

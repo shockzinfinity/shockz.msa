@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Masstransit" Version="8.0.0" />
+    <PackageReference Include="Masstransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="Masstransit.RabbitMQ" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\shockz.msa.eventBus.messages\shockz.msa.eventBus.messages.csproj" />
     <ProjectReference Include="..\shockz.msa.ordering.application\shockz.msa.ordering.application.csproj" />
     <ProjectReference Include="..\shockz.msa.ordering.infrastructure\shockz.msa.ordering.infrastructure.csproj" />
   </ItemGroup>
