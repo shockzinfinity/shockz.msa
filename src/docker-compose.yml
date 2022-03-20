@@ -46,6 +46,12 @@ services:
       context: .
       dockerfile: services/discount/shockz.msa.discount.grpc/Dockerfile
 
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}shockzmsaorderingapi
+    build:
+      context: .
+      dockerfile: services/ordering/shockz.msa.ordering.api/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
