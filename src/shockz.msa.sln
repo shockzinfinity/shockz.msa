@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apiGateways", "apiGateways"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.ocelotApiGw", "apiGateways\shockz.msa.ocelotApiGw\shockz.msa.ocelotApiGw.csproj", "{BFE863C9-105A-482F-A8BB-5EA6D59C4A2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.shopping.Aggregator", "apiGateways\shockz.msa.shopping.Aggregator\shockz.msa.shopping.Aggregator.csproj", "{311A46E5-F658-49C1-B5C6-A38217987E26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{BFE863C9-105A-482F-A8BB-5EA6D59C4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE863C9-105A-482F-A8BB-5EA6D59C4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFE863C9-105A-482F-A8BB-5EA6D59C4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311A46E5-F658-49C1-B5C6-A38217987E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311A46E5-F658-49C1-B5C6-A38217987E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311A46E5-F658-49C1-B5C6-A38217987E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311A46E5-F658-49C1-B5C6-A38217987E26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{ACE2E824-FD9E-4B83-9C72-DC87050C065D} = {D92548E1-385D-4796-A6E2-1DEEEFBBD967}
 		{F1E8C8F7-AAD5-4CF3-A57D-3005B4C2AF3D} = {4925C668-661F-473A-B90F-B44A872BD9A1}
 		{BFE863C9-105A-482F-A8BB-5EA6D59C4A2E} = {A644F62E-6C9D-470C-84D1-C4B9F729F731}
+		{311A46E5-F658-49C1-B5C6-A38217987E26} = {A644F62E-6C9D-470C-84D1-C4B9F729F731}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}

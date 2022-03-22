@@ -61,9 +61,16 @@ services:
       context: .
       dockerfile: apiGateways/shockz.msa.ocelotApiGw/Dockerfile
 
+  shopping.aggregator:
+    image: ${DOCKER_REGISTRY-}shoppingaggregator
+    build:
+      context: .
+      dockerfile: apiGateways/shockz.msa.shopping.Aggregator/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
   mssql_data:
+
