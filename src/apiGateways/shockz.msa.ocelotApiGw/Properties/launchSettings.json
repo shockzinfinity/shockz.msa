@@ -1,14 +1,19 @@
-﻿{
+{
   "profiles": {
     "shockz.msa.ocelotApiGw": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5300",
       "environmentVariables": {
-        //"ASPNETCORE_ENVIRONMENT": "Development"
         "ASPNETCORE_ENVIRONMENT": "Local"
-      }
+      },
+      "applicationUrl": "http://localhost:5300",
+      "dotnetRunMessages": true
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
     }
   }
 }

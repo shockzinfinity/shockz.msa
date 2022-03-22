@@ -55,6 +55,12 @@ services:
       context: .
       dockerfile: services/ordering/shockz.msa.ordering.api/Dockerfile
 
+  ocelotapigw:
+    image: ${DOCKER_REGISTRY-}ocelotapigw
+    build:
+      context: .
+      dockerfile: apiGateways/shockz.msa.ocelotApiGw/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
