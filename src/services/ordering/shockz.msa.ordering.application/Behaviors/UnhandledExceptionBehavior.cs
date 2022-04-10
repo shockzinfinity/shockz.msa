@@ -21,7 +21,7 @@ namespace shockz.msa.ordering.application.Behaviors
         var requestName = typeof(TRequest).Name;
         _logger.LogError(ex, "Application Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
-        if(ex is ValidationException) {
+        if (ex is ValidationException) {
           foreach (var (error, i) in (ex as ValidationException).Errors.Select((error, i) => (error, i))) {
             // NOTE: below code has performace issue.
             //_logger.LogError($"{i + 1}. {error.Key} {error.Value.Aggregate((t, x) => t + '|' + x)}");

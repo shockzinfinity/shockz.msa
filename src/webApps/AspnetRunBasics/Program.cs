@@ -1,9 +1,6 @@
-using AspnetRunBasics.Data;
-using AspnetRunBasics.Repositories;
+using AspnetRunBasics.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -11,17 +8,19 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AspnetRunContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ICartRepository, CartRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IContactRepository, ContactRepository>();
+//builder.Services.AddDbContext<AspnetRunContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddScoped<IProductRepository, ProductRepository>();
+//builder.Services.AddScoped<ICartRepository, CartRepository>();
+//builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+//builder.Services.AddScoped<IContactRepository, ContactRepository>();
+
+builder.Services.AddHttpClient<ICatalogService, CatalogService>(h => h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]));
+builder.Services.AddHttpClient<IBasketService, BasketService>(h => h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]));
+builder.Services.AddHttpClient<IOrderService, OrderService>(h => h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]));
 
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
-
-SeedDatabase(app);
 
 if (app.Environment.IsDevelopment()) {
   app.UseDeveloperExceptionPage();
@@ -45,20 +44,3 @@ app.UseEndpoints(endpoints =>
 
 //app.Run();
 await app.RunAsync();
-
-static void SeedDatabase(IHost host)
-{
-  using (var scope = host.Services.CreateScope()) {
-    var services = scope.ServiceProvider;
-    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-
-    try {
-      var context = services.GetRequiredService<AspnetRunContext>();
-      AspnetRunContextSeed.SeedAsync(context, loggerFactory).Wait();
-    } catch (Exception ex) {
-      var logger = loggerFactory.CreateLogger<Program>();
-      logger.LogError(ex, "An error occurred seeding the DB.");
-      throw;
-    }
-  }
-}
