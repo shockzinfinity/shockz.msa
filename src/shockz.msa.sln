@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webApps", "webApps", "{AAFF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspnetRunBasics", "webApps\AspnetRunBasics\AspnetRunBasics.csproj", "{07B59655-89DF-4948-8B99-5B6BB2D90E5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.commonLogging", "buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj", "{E620C830-4F80-4F54-90F6-C93E5DDB56E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,10 @@ Global
 		{07B59655-89DF-4948-8B99-5B6BB2D90E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07B59655-89DF-4948-8B99-5B6BB2D90E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07B59655-89DF-4948-8B99-5B6BB2D90E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E620C830-4F80-4F54-90F6-C93E5DDB56E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E620C830-4F80-4F54-90F6-C93E5DDB56E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E620C830-4F80-4F54-90F6-C93E5DDB56E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E620C830-4F80-4F54-90F6-C93E5DDB56E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{BFE863C9-105A-482F-A8BB-5EA6D59C4A2E} = {A644F62E-6C9D-470C-84D1-C4B9F729F731}
 		{311A46E5-F658-49C1-B5C6-A38217987E26} = {A644F62E-6C9D-470C-84D1-C4B9F729F731}
 		{07B59655-89DF-4948-8B99-5B6BB2D90E5F} = {AAFFA8D4-B014-4AB8-BF91-B14B4BF35C23}
+		{E620C830-4F80-4F54-90F6-C93E5DDB56E1} = {4925C668-661F-473A-B90F-B44A872BD9A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}

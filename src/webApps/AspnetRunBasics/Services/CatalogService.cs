@@ -21,8 +21,12 @@ public class CatalogService : ICatalogService
 
   public async Task<IEnumerable<CatalogModel>> GetCatalog()
   {
-    _logger.LogDebug($"Getting catalog products from url: {_client.BaseAddress}");
-    //_logger.LogInformation($"Getting catalog products from url: {_client.BaseAddress}");
+    //_logger.LogDebug($"Getting catalog products from url: {_client.BaseAddress}");
+    //_logger.LogInformation($"Getting catalog products from url: {_client.BaseAddress} and custom property : {6}");
+
+    // [kibana>Discover] filters.customProperty = 6
+    // messageTemplate 방식을 위해서는 $"" 방식으로 하면 안됨
+    _logger.LogInformation("Getting catalog products from url: {url} and custom property: {customProperty}", _client.BaseAddress, 6); // kibana filter test
 
     return await _client.GetFromJsonAsync<List<CatalogModel>>("/Product");
   }
