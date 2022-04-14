@@ -16,6 +16,8 @@ public class LoggingDelegatingHandler : DelegatingHandler
   protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
   {
     try {
+      _logger.LogInformation("Sending request to {Url}", request.RequestUri);
+
       var response = await base.SendAsync(request, cancellationToken);
 
       if (response.IsSuccessStatusCode) {
