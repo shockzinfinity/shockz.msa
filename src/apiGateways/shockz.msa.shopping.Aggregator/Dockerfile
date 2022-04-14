@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["apiGateways/shockz.msa.shopping.Aggregator/shockz.msa.shopping.Aggregator.csproj", "apiGateways/shockz.msa.shopping.Aggregator/"]
+COPY ["buildingBlocks/shockz.msa.commonLogging/shockz.msa.commonLogging.csproj", "buildingBlocks/shockz.msa.commonLogging/"]
 RUN dotnet restore "apiGateways/shockz.msa.shopping.Aggregator/shockz.msa.shopping.Aggregator.csproj"
 COPY . .
 WORKDIR "/src/apiGateways/shockz.msa.shopping.Aggregator"

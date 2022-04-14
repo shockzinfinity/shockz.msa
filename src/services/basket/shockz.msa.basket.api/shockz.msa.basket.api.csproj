@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj" />
     <ProjectReference Include="..\..\..\buildingBlocks\shockz.msa.eventBus.messages\shockz.msa.eventBus.messages.csproj" />
   </ItemGroup>
 

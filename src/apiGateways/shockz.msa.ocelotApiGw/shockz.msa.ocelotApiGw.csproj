@@ -15,4 +15,8 @@
     <PackageReference Include="Ocelot.Cache.CacheManager" Version="18.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj" />
+  </ItemGroup>
+
 </Project>

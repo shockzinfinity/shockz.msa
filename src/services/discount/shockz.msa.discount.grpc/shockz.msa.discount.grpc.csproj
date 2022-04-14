@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
   </ItemGroup>
 

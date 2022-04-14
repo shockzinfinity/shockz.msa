@@ -99,7 +99,7 @@ services:
     image: kibana:7.17.2 # not support latest tag
     container_name: kibana
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_URL=http://elasticsearch
     depends_on:
       - elasticsearch
     ports:

@@ -1,7 +1,10 @@
+using Serilog;
 using shockz.msa.catalog.api.Data;
 using shockz.msa.catalog.api.Repositories;
+using shockz.msa.commonLogging;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();

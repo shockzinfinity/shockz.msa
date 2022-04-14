@@ -1,4 +1,6 @@
 using MassTransit;
+using Serilog;
+using shockz.msa.commonLogging;
 using shockz.msa.eventBus.messages.Common;
 using shockz.msa.ordering.api.EventBusConsumer;
 using shockz.msa.ordering.api.Extensions;
@@ -7,6 +9,7 @@ using shockz.msa.ordering.infrastructure;
 using shockz.msa.ordering.infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.AddApplicationServices();

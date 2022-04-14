@@ -16,4 +16,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj" />
+  </ItemGroup>
+
 </Project>

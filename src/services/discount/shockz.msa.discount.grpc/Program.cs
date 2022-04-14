@@ -1,8 +1,11 @@
+using Serilog;
+using shockz.msa.commonLogging;
 using shockz.msa.discount.grpc.Extensions;
 using shockz.msa.discount.grpc.Repositories;
 using shockz.msa.discount.grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Additional configuration is required to successfully run gRPC on macOS.
 // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682

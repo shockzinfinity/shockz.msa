@@ -1,7 +1,10 @@
+using Serilog;
+using shockz.msa.commonLogging;
 using shockz.msa.discount.api.Extensions;
 using shockz.msa.discount.api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();

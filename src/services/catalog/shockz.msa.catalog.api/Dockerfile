@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["services/catalog/shockz.msa.catalog.api/shockz.msa.catalog.api.csproj", "services/catalog/shockz.msa.catalog.api/"]
+COPY ["buildingBlocks/shockz.msa.commonLogging/shockz.msa.commonLogging.csproj", "buildingBlocks/shockz.msa.commonLogging/"]
 RUN dotnet restore "services/catalog/shockz.msa.catalog.api/shockz.msa.catalog.api.csproj"
 COPY . .
 WORKDIR "/src/services/catalog/shockz.msa.catalog.api"

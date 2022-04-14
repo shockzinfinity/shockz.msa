@@ -2,7 +2,7 @@
   "profiles": {
     "shockz.msa.ocelotApiGw": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Local"
       },

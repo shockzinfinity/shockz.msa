@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["apiGateways/shockz.msa.ocelotApiGw/shockz.msa.ocelotApiGw.csproj", "apiGateways/shockz.msa.ocelotApiGw/"]
+COPY ["buildingBlocks/shockz.msa.commonLogging/shockz.msa.commonLogging.csproj", "buildingBlocks/shockz.msa.commonLogging/"]
 RUN dotnet restore "apiGateways/shockz.msa.ocelotApiGw/shockz.msa.ocelotApiGw.csproj"
 COPY . .
 WORKDIR "/src/apiGateways/shockz.msa.ocelotApiGw"
