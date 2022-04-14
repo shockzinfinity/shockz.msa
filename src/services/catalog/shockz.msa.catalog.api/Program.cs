@@ -1,3 +1,6 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using shockz.msa.catalog.api.Data;
 using shockz.msa.catalog.api.Repositories;
@@ -15,6 +18,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks()
+  .AddMongoDb(builder.Configuration["DatabaseSettings:ConnectionString"], "Catalog MongoDb Health", HealthStatus.Degraded);
 
 var app = builder.Build();
 
@@ -33,5 +38,10 @@ if (app.Environment.IsDevelopment()) {
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions()
+{
+  Predicate = _ => true,
+  ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();
