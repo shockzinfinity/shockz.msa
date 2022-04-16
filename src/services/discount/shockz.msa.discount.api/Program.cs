@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using shockz.msa.commonLogging;
 using shockz.msa.discount.api.Extensions;
@@ -14,6 +16,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks()
+  .AddNpgSql(builder.Configuration["DatabaseSettings:ConnectionString"]);
 
 var app = builder.Build();
 
@@ -34,5 +38,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions
+{
+  Predicate = _ => true,
+  ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();

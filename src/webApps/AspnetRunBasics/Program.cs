@@ -1,10 +1,13 @@
 using AspnetRunBasics.Services;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using Polly.Extensions.Http;
 using Polly;
+using Polly.Extensions.Http;
 using Serilog;
 using shockz.msa.commonLogging;
 using System;
@@ -68,6 +71,8 @@ builder.Services.AddHttpClient<IOrderService, OrderService>(h =>
   .AddPolicyHandler(GetCircuitBreakerPolicy());
 
 builder.Services.AddRazorPages();
+builder.Services.AddHealthChecks()
+  .AddUrlGroup(new Uri(builder.Configuration["ApiSettings:GatewayAddress"]), "Ocelot API Gateway", HealthStatus.Degraded);
 
 var app = builder.Build();
 
@@ -89,6 +94,11 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
   endpoints.MapRazorPages();
+  endpoints.MapHealthChecks("/hc", new HealthCheckOptions
+  {
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+  });
 });
 
 //app.Run();

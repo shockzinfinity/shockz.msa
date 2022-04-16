@@ -1,3 +1,6 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Polly;
 using Polly.Extensions.Http;
 using Serilog;
@@ -60,6 +63,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks()
+  .AddUrlGroup(new Uri($"{builder.Configuration["ApiSettings:CatalogUrl"]}/index.html"), "Catalog.API", HealthStatus.Degraded)
+  .AddUrlGroup(new Uri($"{builder.Configuration["ApiSettings:BasketUrl"]}/index.html"), "Basket.API", HealthStatus.Degraded)
+  .AddUrlGroup(new Uri($"{builder.Configuration["ApiSettings:OrderingUrl"]}/index.html"), "Ordering.API", HealthStatus.Degraded);
 
 var app = builder.Build();
 
@@ -78,5 +85,10 @@ if (app.Environment.IsDevelopment()) {
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions
+{
+  Predicate = _ => true,
+  ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();

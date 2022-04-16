@@ -32,6 +32,7 @@ builder.Services.AddScoped<DiscountGrpcService>();
 // MassTransit, RabbitMQ configuration
 builder.Services.AddMassTransit(config =>
 {
+  config.AddHealthChecks();
   config.UsingRabbitMq((ctx, cfg) =>
   {
     cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);

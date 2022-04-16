@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using MassTransit;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using shockz.msa.commonLogging;
 using shockz.msa.eventBus.messages.Common;
@@ -17,6 +19,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddMassTransit(config =>
 {
+  config.AddHealthChecks();
   config.AddConsumer<BasketCheckoutConsumer>(); // ** IMPORTANT **
   config.UsingRabbitMq((ctx, cfg) =>
   {
@@ -36,6 +39,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks()
+  .AddDbContextCheck<OrderContext>();
 
 var app = builder.Build();
 
@@ -61,5 +66,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/hc", new HealthCheckOptions
+{
+  Predicate = _ => true,
+  ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();

@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using shockz.msa.commonLogging;
 using shockz.msa.discount.grpc.Extensions;
@@ -14,6 +16,8 @@ builder.Host.UseSerilog(SeriLogger.Configure);
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddGrpc();
+builder.Services.AddHealthChecks()
+  .AddNpgSql(builder.Configuration["DatabaseSettings:ConnectionString"]);
 
 var app = builder.Build();
 app.MigrateDatabase<Program>();
@@ -21,5 +25,10 @@ app.MigrateDatabase<Program>();
 // Configure the HTTP request pipeline.
 app.MapGrpcService<DiscountService>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+app.MapHealthChecks("/hc", new HealthCheckOptions
+{
+  Predicate = _ => true,
+  ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();
