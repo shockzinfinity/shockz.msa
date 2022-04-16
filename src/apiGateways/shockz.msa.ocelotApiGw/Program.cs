@@ -16,7 +16,15 @@ builder.Services.AddOcelot().AddCacheManager(settings => settings.WithDictionary
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello there.");
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+  endpoints.MapGet("/", async context =>
+  {
+    await context.Response.WriteAsync("Hello there.");
+  });
+});
+
 await app.UseOcelot(); // middleware
 
 app.Run();

@@ -5,14 +5,12 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "catalog.api": "StartDebugging",
-        "catalogdb": "StartWithoutDebugging",
         "basket.api": "StartDebugging",
-        "basketdb": "StartWithoutDebugging",
         "discount.api": "StartDebugging",
-        "discountdb": "StartWithoutDebugging",
-        "mongoclient": "StartWithoutDebugging",
-        "pgadmin": "StartWithoutDebugging",
-        "portainer": "StartWithoutDebugging"
+        "discount.grpc": "StartDebugging",
+        "ordering.api": "StartDebugging",
+        "aspnetrunbasics": "StartDebugging",
+        "webstatus": "StartDebugging"
       }
     }
   }

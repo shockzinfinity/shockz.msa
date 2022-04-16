@@ -73,6 +73,18 @@ services:
   kibana:
     image: kibana:7.17.2 # not support latest tag
 
+  aspnetrunbasics:
+    image: ${DOCKER_REGISTRY-}aspnetrunbasics
+    build:
+      context: .
+      dockerfile: webApps/AspnetRunBasics/Dockerfile
+
+  webstatus:
+    image: ${DOCKER_REGISTRY-}webstatus
+    build:
+      context: .
+      dockerfile: webApps/WebStatus/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
