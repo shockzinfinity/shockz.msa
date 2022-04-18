@@ -36,6 +36,7 @@ builder.Services.AddMassTransit(config =>
   config.UsingRabbitMq((ctx, cfg) =>
   {
     cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+    //cfg.UseHealthCheck(ctx); // ????
   });
 });
 //builder.Services.AddMassTransitHostedService(); // NOTE: obsolete

@@ -15,7 +15,7 @@ public static class SeriLogger
        .Enrich.FromLogContext()
        .Enrich.WithMachineName()
        .WriteTo.Debug()
-       .WriteTo.Console()
+       .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {TraceId} {Level:u3} {Message}{NewLine}{Exception}")
        .WriteTo.Elasticsearch(
          new ElasticsearchSinkOptions(new Uri(elasticUri))
          {
