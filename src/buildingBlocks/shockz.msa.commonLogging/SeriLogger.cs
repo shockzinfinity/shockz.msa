@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Enrichers.Span;
 using Serilog.Sinks.Elasticsearch;
 
 namespace shockz.msa.commonLogging;
@@ -14,6 +15,8 @@ public static class SeriLogger
      loggerConfiguration
        .Enrich.FromLogContext()
        .Enrich.WithMachineName()
+       .Enrich.WithSpan()
+       .Enrich.WithCorrelationId()
        .WriteTo.Debug()
        .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {TraceId} {Level:u3} {Message}{NewLine}{Exception}")
        .WriteTo.Elasticsearch(
