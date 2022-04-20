@@ -41,10 +41,17 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+    <PackageReference Include="OpenTelemetry" Version="1.2.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.2.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.2.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc9.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj" />
+    <ProjectReference Include="..\..\buildingBlocks\shockz.msa.pollyPolicy\shockz.msa.pollyPolicy.csproj" />
   </ItemGroup>
 
 </Project>

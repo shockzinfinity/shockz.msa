@@ -3,76 +3,72 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using Polly;
-using Polly.Extensions.Http;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
 using shockz.msa.commonLogging;
+using shockz.msa.pollyPolicy;
 using System;
-using System.Net.Http;
-
-static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
-{
-  // 2 ^ 1 = 2s
-  // 2 ^ 2 = 4s
-  // 2 ^ 3 = 8s
-  // 2 ^ 4 = 16s
-  // 2 ^ 5 = 32s
-
-  return HttpPolicyExtensions
-    .HandleTransientHttpError()
-    .WaitAndRetryAsync(
-      retryCount: 5,
-      sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-      onRetry: (exception, retryCount, context) =>
-      {
-        Log.Error($"Retry {retryCount} of {context.PolicyKey} at {context.OperationKey}, due to: {exception}");
-      });
-}
-
-static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy()
-{
-  return HttpPolicyExtensions
-    .HandleTransientHttpError()
-    .CircuitBreakerAsync(
-      handledEventsAllowedBeforeBreaking: 5,
-      durationOfBreak: TimeSpan.FromSeconds(30));
-}
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(SeriLogger.Configure);
-
-//builder.Services.AddDbContext<AspnetRunContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//builder.Services.AddScoped<IProductRepository, ProductRepository>();
-//builder.Services.AddScoped<ICartRepository, CartRepository>();
-//builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-//builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Host.ConfigureLogging(loggingBuilder =>
+{
+  loggingBuilder.Configure(options =>
+  {
+    options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
+  });
+}).UseSerilog(SeriLogger.Configure);
 
 builder.Services.AddTransient<LoggingDelegatingHandler>();
 
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(h =>
   h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]))
   .AddHttpMessageHandler<LoggingDelegatingHandler>()
-  .AddPolicyHandler(GetRetryPolicy())
-  .AddPolicyHandler(GetCircuitBreakerPolicy());
+  .AddPolicyHandler(PollyPolicy.GetRetryPolicy())
+  .AddPolicyHandler(PollyPolicy.GetCircuitBreakerPolicy());
 
 builder.Services.AddHttpClient<IBasketService, BasketService>(h =>
   h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]))
   .AddHttpMessageHandler<LoggingDelegatingHandler>()
-  .AddPolicyHandler(GetRetryPolicy())
-  .AddPolicyHandler(GetCircuitBreakerPolicy());
+  .AddPolicyHandler(PollyPolicy.GetRetryPolicy())
+  .AddPolicyHandler(PollyPolicy.GetCircuitBreakerPolicy());
 
 builder.Services.AddHttpClient<IOrderService, OrderService>(h =>
   h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]))
   .AddHttpMessageHandler<LoggingDelegatingHandler>()
-  .AddPolicyHandler(GetRetryPolicy())
-  .AddPolicyHandler(GetCircuitBreakerPolicy());
+  .AddPolicyHandler(PollyPolicy.GetRetryPolicy())
+  .AddPolicyHandler(PollyPolicy.GetCircuitBreakerPolicy());
 
 builder.Services.AddRazorPages();
 builder.Services.AddHealthChecks()
   .AddUrlGroup(new Uri(builder.Configuration["ApiSettings:GatewayAddress"]), "Ocelot API Gateway", HealthStatus.Degraded);
+
+builder.Services.AddOpenTelemetryTracing(traceBuiilder =>
+{
+  traceBuiilder.AddAspNetCoreInstrumentation()
+    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName))
+    .AddHttpClientInstrumentation()
+    .AddSource(nameof(CatalogService))
+    .AddSource(nameof(BasketService))
+    .AddSource(nameof(OrderService))
+    .AddJaegerExporter(options =>
+    {
+      options.AgentHost = builder.Configuration.GetValue<string>("OpenTelmetry:Host");
+      options.AgentPort = builder.Configuration.GetValue<int>("OpenTelmetry:Port");
+      options.ExportProcessorType = ExportProcessorType.Simple;
+    })
+    .AddConsoleExporter(options =>
+    {
+      options.Targets = ConsoleExporterOutputTargets.Console;
+    });
+});
 
 var app = builder.Build();
 

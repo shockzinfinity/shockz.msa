@@ -2,14 +2,28 @@ using HealthChecks.UI.Client;
 using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
+using shockz.msa.basket.api.Controllers;
 using shockz.msa.basket.api.GrpcServices;
 using shockz.msa.basket.api.Repositories;
 using shockz.msa.commonLogging;
 using shockz.msa.discount.grpc.Protos;
+using System.Diagnostics;
+
+Activity.DefaultIdFormat = ActivityIdFormat.W3C;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(SeriLogger.Configure);
+builder.Host.ConfigureLogging(loggingBuilder =>
+{
+  loggingBuilder.Configure(options =>
+  {
+    options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
+  });
+}).UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 // Redis configuration
@@ -47,6 +61,24 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks()
    .AddRedis(builder.Configuration["CacheSettings:ConnectionString"], "Redis Health", HealthStatus.Degraded);
+
+builder.Services.AddOpenTelemetryTracing(traceBuiilder =>
+{
+  traceBuiilder.AddAspNetCoreInstrumentation()
+    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName))
+    .AddHttpClientInstrumentation()
+    .AddSource(nameof(BasketController))
+    .AddJaegerExporter(options =>
+    {
+      options.AgentHost = builder.Configuration.GetValue<string>("OpenTelmetry:Host");
+      options.AgentPort = builder.Configuration.GetValue<int>("OpenTelmetry:Port");
+      options.ExportProcessorType = ExportProcessorType.Simple;
+    })
+    .AddConsoleExporter(options =>
+    {
+      options.Targets = ConsoleExporterOutputTargets.Console;
+    });
+});
 
 var app = builder.Build();
 

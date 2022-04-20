@@ -1,7 +1,6 @@
-﻿namespace shockz.msa.eventBus.messages.Common
+﻿namespace shockz.msa.eventBus.messages.Common;
+
+public static class EventBusConstants
 {
-  public static class EventBusConstants
-  {
-    public const string BasketCheckoutQueue = "basketcheckout-queue";
-  }
+  public const string BasketCheckoutQueue = "basketcheckout-queue";
 }
