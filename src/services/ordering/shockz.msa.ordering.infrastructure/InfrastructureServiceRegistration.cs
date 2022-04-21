@@ -8,22 +8,21 @@ using shockz.msa.ordering.infrastructure.Email;
 using shockz.msa.ordering.infrastructure.Persistence;
 using shockz.msa.ordering.infrastructure.Repositories;
 
-namespace shockz.msa.ordering.infrastructure
+namespace shockz.msa.ordering.infrastructure;
+
+public static class InfrastructureServiceRegistration
 {
-  public static class InfrastructureServiceRegistration
+  public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
   {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
-    {
-      services.AddDbContext<OrderContext>(options => options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString")));
+    services.AddDbContext<OrderContext>(options => options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString")));
 
-      // for the meaditor
-      services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
-      services.AddScoped<IOrderingRepository, OrderingRepository>();
+    // for the meaditor
+    services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+    services.AddScoped<IOrderingRepository, OrderingRepository>();
 
-      services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));
-      services.AddTransient<IEmailService, EmailService>();
+    services.Configure<EmailSettings>(c => configuration.GetSection("EmailSettings"));
+    services.AddTransient<IEmailService, EmailService>();
 
-      return services;
-    }
+    return services;
   }
 }

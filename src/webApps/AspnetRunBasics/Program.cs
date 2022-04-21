@@ -1,4 +1,5 @@
 using AspnetRunBasics.Services;
+using AspnetRunBasics.Settings;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -27,6 +28,7 @@ builder.Host.ConfigureLogging(loggingBuilder =>
 }).UseSerilog(SeriLogger.Configure);
 
 builder.Services.AddTransient<LoggingDelegatingHandler>();
+builder.Services.Configure<ApiSettings>(c => builder.Configuration.GetSection("ApiSettings")); // in case needed by other services
 
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(h =>
   h.BaseAddress = new Uri(builder.Configuration["ApiSettings:GatewayAddress"]))
