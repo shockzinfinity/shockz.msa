@@ -88,6 +88,12 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:latest
 
+  filemanagement:
+    image: ${DOCKER_REGISTRY-}filemanagement
+    build:
+      context: .
+      dockerfile: services/fileManagement/shockz.msa.fileManagement/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:

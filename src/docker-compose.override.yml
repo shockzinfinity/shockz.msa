@@ -255,3 +255,10 @@ services:
       - "14250:14250"
     volumes:
       - jaeger-data:/badger
+
+  filemanagement:
+    container_name: filemanagement
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8008:80"
