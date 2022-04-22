@@ -2,6 +2,34 @@
 
 - msa project based on .net 6
 
+## debug & test
+
+- Service Endpoint
+  | Service | Port | Description |
+  | :-----: | :--- | :------------------ |
+  | Catalog | 8000 | product information |
+  | Basket | 8001 | cart |
+  | Discount | 8002 | discouont information by product |
+  | Discount Grpc | 8003 | discouont information by product |
+  | Order | 8004 | ordering service |
+  | ApiGateway | 8010 | api gateway (ocelot) |
+  | Shopping Aggregator | 8005 | ordering service |
+  | Frontend | 8006 | frontend MVC (Aspnetrunbasics) |
+  | HealthCheck UI | 8007 | HealthCheck UI (WatchDog) |
+
+- Infra Service Endpoint
+  | Service | Port | Description |
+  | :-----: | :--- | :------------------ |
+  | CatalogDb | 27017 | Mongo |
+  | Mongo Client | 3000 | Mongo Db Web Client |
+  | BasketDb | 6379 | Redis |
+  | DiscountDb | 5342 | PostgreSQL |
+  | PgAdmin | 5050 | PostgreSQL Management |
+  | OrderDb | 1433 | SQL Server |
+  | RabbitMQ | 15672 | RabbitMQ management dashboard |
+  | Kibana | 5601 | Elastic Search dashboard |
+  | Jaeger | 16606 | Trace Analyzer |
+
 ## useful commands
 
 - docker commands
