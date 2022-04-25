@@ -91,7 +91,7 @@ static DefaultTusConfiguration CreateTusConfiguration(IServiceProvider servicePr
 
   return new DefaultTusConfiguration
   {
-    Store = new TusDiskStore(tusFiles), // TODO: file drop default path
+    Store = new TusDiskStore(tusFiles),
     UrlPath = "/files",
     MetadataParsingStrategy = MetadataParsingStrategy.AllowEmptyValues,
     UsePipelinesIfAvailable = true,
@@ -110,7 +110,9 @@ static DefaultTusConfiguration CreateTusConfiguration(IServiceProvider servicePr
         //var fileName = fileNameMetadata.GetString(Encoding.UTF8);
         //var extensionsName = Path.GetExtension(fileName);
 
+        // TODO: move to another disk store (or external storage) - e.g. AWS S3 with Hangfire thread
         //File.Move(Path.Combine(tusFiles, eventContext.FileId), Path.Combine(tusFiles, $"{eventContext.FileId}{extensionsName}"));
+
         logger.LogInformation($"Upload of {eventContext.FileId} completed using {eventContext.Store.GetType().FullName}");
       }
     }

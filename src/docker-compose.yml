@@ -102,3 +102,4 @@ volumes:
   mssql_data:
   elasticsearch_data:
   jaeger-data:
+  tusfile-data:

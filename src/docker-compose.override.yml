@@ -262,3 +262,5 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "8008:80"
+    volumes:
+      - tusfile-data:/app/tusfiles
