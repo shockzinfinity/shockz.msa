@@ -56,11 +56,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStatus", "webApps\WebSta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.pollyPolicy", "buildingBlocks\shockz.msa.pollyPolicy\shockz.msa.pollyPolicy.csproj", "{E0C872E8-439E-4500-9BF6-BFBE5F54A390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.extensions", "buildingBlocks\shockz.msa.extensions\shockz.msa.extensions.csproj", "{16B93B9C-A9A9-4187-BCB0-D8BAADABE3BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.extensions", "buildingBlocks\shockz.msa.extensions\shockz.msa.extensions.csproj", "{16B93B9C-A9A9-4187-BCB0-D8BAADABE3BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fileManagement", "fileManagement", "{BD6F7DF2-6FFF-4F14-854A-954EB791C7C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.fileManagement", "services\fileManagement\shockz.msa.fileManagement\shockz.msa.fileManagement.csproj", "{B2FC7AF8-67A8-48B3-8DB6-16588601C596}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.fileManagement", "services\fileManagement\shockz.msa.fileManagement\shockz.msa.fileManagement.csproj", "{B2FC7AF8-67A8-48B3-8DB6-16588601C596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.blazorUtil", "buildingBlocks\shockz.msa.blazorUtil\shockz.msa.blazorUtil.csproj", "{E82DA6EB-BA19-4717-94A3-FE469BA35ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +142,10 @@ Global
 		{B2FC7AF8-67A8-48B3-8DB6-16588601C596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2FC7AF8-67A8-48B3-8DB6-16588601C596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2FC7AF8-67A8-48B3-8DB6-16588601C596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E82DA6EB-BA19-4717-94A3-FE469BA35ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82DA6EB-BA19-4717-94A3-FE469BA35ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E82DA6EB-BA19-4717-94A3-FE469BA35ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E82DA6EB-BA19-4717-94A3-FE469BA35ED8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,6 +173,7 @@ Global
 		{16B93B9C-A9A9-4187-BCB0-D8BAADABE3BD} = {4925C668-661F-473A-B90F-B44A872BD9A1}
 		{BD6F7DF2-6FFF-4F14-854A-954EB791C7C3} = {9BB4484D-3E1A-4CEB-A4C0-45D81BF0695B}
 		{B2FC7AF8-67A8-48B3-8DB6-16588601C596} = {BD6F7DF2-6FFF-4F14-854A-954EB791C7C3}
+		{E82DA6EB-BA19-4717-94A3-FE469BA35ED8} = {4925C668-661F-473A-B90F-B44A872BD9A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}
