@@ -9,15 +9,14 @@ namespace shockz.msa.ordering.infrastructure.Email
 {
   public class EmailService : IEmailService
   {
-    // NOTE: why use public with getter?
-    // TODO: check this out; use readonly & singleton
-    public EmailSettings _emailSettings { get; }
-    public ILogger<EmailService> _logger { get; }
+    private readonly EmailSettings _emailSettings;
+
+    private readonly ILogger<EmailService> _logger;
 
     public EmailService(IOptions<EmailSettings> emailSettings, ILogger<EmailService> logger)
     {
-      _emailSettings = emailSettings.Value;
-      _logger = logger;
+      _emailSettings = emailSettings.Value ?? throw new ArgumentNullException(nameof(emailSettings));
+      _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task<bool> SendEmail(application.Models.Email email)
