@@ -23,12 +23,12 @@
   | CatalogDb | 27017 | Mongo |
   | Mongo Client | 3000 | Mongo Db Web Client |
   | BasketDb | 6379 | Redis |
-  | DiscountDb | 5342 | PostgreSQL |
+  | DiscountDb | 5432 | PostgreSQL |
   | PgAdmin | 5050 | PostgreSQL Management |
   | OrderDb | 1433 | SQL Server |
   | RabbitMQ | 15672 | RabbitMQ management dashboard |
   | Kibana | 5601 | Elastic Search dashboard |
-  | Jaeger | 16606 | Trace Analyzer |
+  | Jaeger | 16686 | Trace Analyzer |
 
 ## useful commands
 
@@ -37,11 +37,11 @@
 ```bash
 $ cd src
 # create and run all containers
-$ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
+$ docker-compose -f ./docker-compose.yml -f ./docker-compose.override.yml up -d
 # stop and remove all running containers
-$ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml down
+$ docker-compose -f ./docker-compose.yml -f ./docker-compose.override.yml down
 # build and run all running containers
-$ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --build
+$ docker-compose -f ./docker-compose.yml -f ./docker-compose.override.yml up --build
 # display the list of all running containers
 $ docker ps
 # display the list of all images
