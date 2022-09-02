@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Enrichers.Span;
+using Serilog.Exceptions;
 using Serilog.Sinks.Elasticsearch;
 
 namespace shockz.msa.commonLogging;
@@ -14,6 +15,7 @@ public static class SeriLogger
 
      loggerConfiguration
        .Enrich.FromLogContext()
+       .Enrich.WithExceptionDetails()
        .Enrich.WithMachineName()
        .Enrich.WithSpan()
        .Enrich.WithCorrelationId()

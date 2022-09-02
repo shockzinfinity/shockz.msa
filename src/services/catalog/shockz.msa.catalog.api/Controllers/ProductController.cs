@@ -27,7 +27,7 @@ namespace shockz.msa.catalog.api.Controllers
       return Ok(products);
     }
 
-    [HttpGet("{id:length(24)}", Name = "GetProduct")]
+    [HttpGet("{id:length(24)}", Name = "GetProductById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Product>> GetProductById(string id)
@@ -56,7 +56,7 @@ namespace shockz.msa.catalog.api.Controllers
     {
       await _productRepository.CreateProduct(product);
 
-      return CreatedAtRoute("GetProduct", new { id = product.Id }, GetProductById);
+      return CreatedAtRoute("GetProductById", new { id = product.Id }, product);
     }
 
     [HttpPut]

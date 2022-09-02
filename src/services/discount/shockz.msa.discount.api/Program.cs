@@ -51,6 +51,11 @@ builder.Services.AddOpenTelemetryTracing(traceBuiilder =>
     });
 });
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+  builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 app.MigrateDatabase<Program>();
@@ -65,7 +70,8 @@ if (app.Environment.IsDevelopment()) {
   });
 }
 
-app.UseHttpsRedirection();
+app.UseCors();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
