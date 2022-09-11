@@ -21,6 +21,18 @@ builder.Configuration.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}
 //builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 //builder.Logging.AddConsole();
 //builder.Logging.AddDebug();
+var authenticationProviderKey = "IdentityApiKey";
+builder.Services
+  .AddAuthentication()
+  .AddJwtBearer(authenticationProviderKey, x =>
+  {
+    x.Authority = "https://localhost:7072";
+    //x.RequireHttpsMetadata = false;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+      ValidateAudience = false
+    };
+  });
 
 builder.Services.AddOcelot().AddCacheManager(settings => settings.WithDictionaryHandle());
 
