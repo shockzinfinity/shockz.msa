@@ -30,14 +30,16 @@ builder.Services
     client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
   });
 
-builder.Services
-  .AddSingleton(new ClientCredentialsTokenRequest
-  {
-    Address = "https://localhost:7072/connect/token",
-    ClientId = "movieClient",
-    ClientSecret = "secret",
-    Scope = "movieAPI"
-  });
+//builder.Services
+//  .AddSingleton(new ClientCredentialsTokenRequest
+//  {
+//    Address = "https://localhost:7072/connect/token",
+//    ClientId = "movieClient",
+//    ClientSecret = "secret",
+//    Scope = "movieAPI"
+//  });
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services
   .AddAuthentication(options =>
@@ -53,10 +55,12 @@ builder.Services
     options.ClientId = "movies_mvc_client";
     options.ClientSecret = "secret";
 
-    options.ResponseType = OidcConstants.ResponseTypes.Code;
+    //options.ResponseType = OidcConstants.ResponseTypes.Code;
+    options.ResponseType = OidcConstants.ResponseTypes.CodeIdToken;
 
     options.Scope.Add(OidcConstants.StandardScopes.OpenId);
     options.Scope.Add(OidcConstants.StandardScopes.Profile);
+    options.Scope.Add("movieAPI");
 
     options.SaveTokens = true;
 
