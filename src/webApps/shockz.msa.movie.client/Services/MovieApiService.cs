@@ -70,7 +70,8 @@ namespace shockz.msa.movie.client.Services
 
       var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
 
-      var movies = await httpClient.GetFromJsonAsync<IEnumerable<Movie>>("/api/movies/");
+      //var movies = await httpClient.GetFromJsonAsync<IEnumerable<Movie>>("/api/movies/");
+      var movies = await httpClient.GetFromJsonAsync<IEnumerable<Movie>>("/movies");
 
       return movies;
     }
