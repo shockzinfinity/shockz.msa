@@ -64,13 +64,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.fileManagement",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.blazorUtil", "buildingBlocks\shockz.msa.blazorUtil\shockz.msa.blazorUtil.csproj", "{E82DA6EB-BA19-4717-94A3-FE469BA35ED8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.movie.api", "services\movie\shockz.msa.movie.api\shockz.msa.movie.api.csproj", "{01744526-F924-4865-A092-A04E410D9133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.movie.api", "services\movie\shockz.msa.movie.api\shockz.msa.movie.api.csproj", "{01744526-F924-4865-A092-A04E410D9133}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "movie", "movie", "{F58B35CF-4A91-4DD7-B75A-E401E94FCAED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identityProvider", "identityProvider", "{F549D090-02CC-4302-9611-172563BEACE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.identityServer", "identityProvider\shockz.msa.identityServer\shockz.msa.identityServer.csproj", "{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.identityServer", "identityProvider\shockz.msa.identityServer\shockz.msa.identityServer.csproj", "{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.movie.client", "webApps\shockz.msa.movie.client\shockz.msa.movie.client.csproj", "{C5517614-8A09-485D-81AC-66BBD5EF50B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -162,6 +164,10 @@ Global
 		{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +199,7 @@ Global
 		{01744526-F924-4865-A092-A04E410D9133} = {F58B35CF-4A91-4DD7-B75A-E401E94FCAED}
 		{F58B35CF-4A91-4DD7-B75A-E401E94FCAED} = {9BB4484D-3E1A-4CEB-A4C0-45D81BF0695B}
 		{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF} = {F549D090-02CC-4302-9611-172563BEACE1}
+		{C5517614-8A09-485D-81AC-66BBD5EF50B5} = {AAFFA8D4-B014-4AB8-BF91-B14B4BF35C23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}
