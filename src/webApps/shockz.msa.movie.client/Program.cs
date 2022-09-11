@@ -1,3 +1,4 @@
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using shockz.msa.movie.client.Services;
@@ -22,10 +23,10 @@ builder.Services
     options.ClientId = "movies_mvc_client";
     options.ClientSecret = "secret";
 
-    options.ResponseType = "code";
+    options.ResponseType = OidcConstants.ResponseTypes.Code;
 
-    options.Scope.Add("openid");
-    options.Scope.Add("profile");
+    options.Scope.Add(OidcConstants.StandardScopes.OpenId);
+    options.Scope.Add(OidcConstants.StandardScopes.Profile);
 
     options.SaveTokens = true;
 

@@ -1,4 +1,6 @@
-﻿using shockz.msa.movie.client.Models;
+﻿using IdentityModel.Client;
+using shockz.msa.movie.client.Models;
+using System.Text.Json;
 
 namespace shockz.msa.movie.client.Services
 {
@@ -6,20 +8,51 @@ namespace shockz.msa.movie.client.Services
   {
     public async Task<IEnumerable<Movie>> GetMovies()
     {
-      var movieList = new List<Movie>();
-      movieList.Add(
-        new Movie
-        {
-          Id = 1,
-          Genre = "Comics",
-          Title = "asd",
-          Rating = "9.2",
-          ImageUrl = "images/src",
-          ReleaseDate = DateTime.Now,
-          Owner = "shockz"
-        });
+      // 1 - Get token from identity server, of course we should provide the IS configuration like address, clientid and clientsecret.
+      // 2 - Send request to Protected API
+      // 3 - deserialize object to movie list
 
-      return await Task.FromResult(movieList);
+      // 1. "retrive" our api credentials. This must be registered on Identity Server
+      var apiClientCredentials = new ClientCredentialsTokenRequest
+      {
+        Address = "https://localhost:7072/connect/token",
+        ClientId = "movieClient",
+        ClientSecret = "secret",
+
+        // This is the scope our Protected API requires.
+        Scope = "movieAPI"
+      };
+
+      // create a new httpclient to talk to our identity server
+      var client = new HttpClient();
+
+      // just check if we can reach the Discovery document. Not 100% needed but ..
+      var disco = await client.GetDiscoveryDocumentAsync("https://localhost:7072");
+      if (disco.IsError) {
+        return null; // throw 500 error
+      }
+
+      // 2. Authenticates and get an access token from Identity Server
+      var tokenResponse = await client.RequestClientCredentialsTokenAsync(apiClientCredentials);
+      if (tokenResponse.IsError) {
+        return null;
+      }
+
+      // 2. Send request to PRotected API
+      // another HttpClient for talking now with our Protected API
+      var apiClient = new HttpClient();
+
+      // 3. Set the access_token in the request Authorization: Bearer <token>
+      apiClient.SetBearerToken(tokenResponse.AccessToken);
+
+      //var response = await apiClient.GetAsync("http://localhost:5256/api/movies");
+
+      //response.EnsureSuccessStatusCode();
+
+      //var moviesList = await JsonSerializer.DeserializeAsync<List<Movie>>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = false });
+      var moviesList = await apiClient.GetFromJsonAsync<List<Movie>>("http://localhost:5256/api/movies");
+
+      return moviesList;
     }
 
     public Task<Movie> GetMovie(int id)
