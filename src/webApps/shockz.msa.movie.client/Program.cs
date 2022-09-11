@@ -1,6 +1,7 @@
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Net.Http.Headers;
 using shockz.msa.movie.client.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMovieApiService, MovieApiService>();
+
+builder.Services.AddTransient<AuthenticationDelegatingHandler>();
+builder.Services
+  .AddHttpClient("MovieAPIClient", client =>
+  {
+    client.BaseAddress = new Uri("https://localhost:5256/");
+    client.DefaultRequestHeaders.Clear();
+    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+  })
+  .AddHttpMessageHandler<AuthenticationDelegatingHandler>();
 
 builder.Services
   .AddAuthentication(options =>
