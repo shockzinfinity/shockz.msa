@@ -1,5 +1,5 @@
 using IdentityModel;
-using IdentityModel.Client;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
@@ -56,15 +56,26 @@ builder.Services
     options.ClientSecret = "secret";
 
     //options.ResponseType = OidcConstants.ResponseTypes.Code;
-    options.ResponseType = OidcConstants.ResponseTypes.CodeIdToken;
+    options.ResponseType = OidcConstants.ResponseTypes.CodeIdToken; // hybrid
 
-    options.Scope.Add(OidcConstants.StandardScopes.OpenId);
-    options.Scope.Add(OidcConstants.StandardScopes.Profile);
+    //options.Scope.Add(OidcConstants.StandardScopes.OpenId); // auto included
+    //options.Scope.Add(OidcConstants.StandardScopes.Profile); // auto included
     options.Scope.Add("movieAPI");
+    options.Scope.Add(OidcConstants.StandardScopes.Address);
+    options.Scope.Add(OidcConstants.StandardScopes.Email);
+    options.Scope.Add("roles");
+
+    options.ClaimActions.MapUniqueJsonKey("role", "role");
 
     options.SaveTokens = true;
 
     options.GetClaimsFromUserInfoEndpoint = true;
+
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+      NameClaimType = JwtClaimTypes.GivenName,
+      RoleClaimType = JwtClaimTypes.Role
+    };
   });
 
 var app = builder.Build();

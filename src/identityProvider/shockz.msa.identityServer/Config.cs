@@ -40,7 +40,10 @@ namespace shockz.msa.identityServer
         {
           IdentityServerConstants.StandardScopes.OpenId,
           IdentityServerConstants.StandardScopes.Profile,
-          "movieAPI"
+          "movieAPI",
+          IdentityServerConstants.StandardScopes.Address,
+          IdentityServerConstants.StandardScopes.Email,
+          "roles"
         }
       }
     };
@@ -57,7 +60,10 @@ namespace shockz.msa.identityServer
     public static IEnumerable<IdentityResource> IdentityResources => new IdentityResource[]
     {
       new IdentityResources.OpenId(),
-      new IdentityResources.Profile()
+      new IdentityResources.Profile(),
+      new IdentityResources.Address(),
+      new IdentityResources.Email(),
+      new IdentityResource("roles", "Your role(s)", new List<string>{ "role" })
     };
 
     public static List<TestUser> TestUsers => new List<TestUser>

@@ -4,7 +4,7 @@
     "shockz.msa.movie.api": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5256",
       "environmentVariables": {
