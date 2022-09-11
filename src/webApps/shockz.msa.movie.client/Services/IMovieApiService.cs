@@ -9,5 +9,6 @@ namespace shockz.msa.movie.client.Services
     Task<Movie> CreateMovie(Movie movie);
     Task<Movie> UpdateMovie(Movie movie);
     Task DeleteMovice(int id);
+    Task<UserInfoViewModel> GetUserInfo();
   }
 }
