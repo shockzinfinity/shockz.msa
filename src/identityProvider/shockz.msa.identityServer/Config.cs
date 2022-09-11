@@ -13,6 +13,13 @@ namespace shockz.msa.identityServer
         AllowedGrantTypes = GrantTypes.ClientCredentials,
         ClientSecrets = { new Secret("secret".Sha256()) },
         AllowedScopes = { "movieAPI" }
+      },
+      new Client
+      {
+        ClientId = "movieClient2",
+        AllowedGrantTypes = GrantTypes.ClientCredentials,
+        ClientSecrets = { new Secret("secret".Sha256()) },
+        AllowedScopes = { "movieAPI" }
       }
     };
 

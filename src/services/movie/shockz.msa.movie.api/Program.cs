@@ -12,6 +12,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication("Bearer")
+  .AddJwtBearer("Bearer", options =>
+  {
+    options.Authority = "https://localhost:7072";
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+      ValidateAudience = false
+    };
+  });
+
+builder.Services.AddAuthorization(options =>
+{
+  options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "movieClient"));
+});
+
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
@@ -25,6 +40,7 @@ if (app.Environment.IsDevelopment()) {
   app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
