@@ -2,10 +2,9 @@ using shockz.msa.movie.client.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IMovieApiService, MovieApiService>();
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IMovieApiService, MovieApiService>();
 
 var app = builder.Build();
 
