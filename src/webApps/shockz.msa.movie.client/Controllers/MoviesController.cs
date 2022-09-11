@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using shockz.msa.movie.client.Models;
 using shockz.msa.movie.client.Services;
+using System.Diagnostics;
 
 namespace shockz.msa.movie.client.Controllers
 {
+  [Authorize]
   public class MoviesController : Controller
   {
     private readonly IMovieApiService _movieApiService;
@@ -19,7 +24,21 @@ namespace shockz.msa.movie.client.Controllers
       //return _context.Movies != null ?
       //            View(await _context.Movies.ToListAsync()) :
       //            Problem("Entity set 'MovieContext.Movie'  is null.");
+
+      await LogTokenAndClaims();
+
       return View(await _movieApiService.GetMovies());
+    }
+
+    public async Task LogTokenAndClaims()
+    {
+      var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+
+      Debug.WriteLine($"Identity token: {identityToken}");
+
+      foreach (var claim in User.Claims) {
+        Debug.WriteLine($"Claim type: {claim.Type} - Claim value: {claim.Value}");
+      }
     }
 
     // GET: Movies/Details/5
