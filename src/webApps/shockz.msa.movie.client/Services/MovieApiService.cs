@@ -68,12 +68,9 @@ namespace shockz.msa.movie.client.Services
 
       var request = new HttpRequestMessage(HttpMethod.Get, "/api/movies/");
 
-      var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-      response.EnsureSuccessStatusCode();
+      var movies = await httpClient.GetFromJsonAsync<IEnumerable<Movie>>("/api/movies/");
 
-      var movies = JsonSerializer.DeserializeAsync<IEnumerable<Movie>>(await response.Content.ReadAsStreamAsync());
-
-      return await movies;
+      return movies;
     }
 
     public Task<Movie> GetMovie(int id)
