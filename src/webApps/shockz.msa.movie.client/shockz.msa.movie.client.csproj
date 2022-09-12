@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\common\shockz.msa.common\shockz.msa.common.csproj" />
+  </ItemGroup>
+
 </Project>

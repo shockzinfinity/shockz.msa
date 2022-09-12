@@ -12,10 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication("Bearer")
-  .AddJwtBearer("Bearer", options =>
+builder.Services.AddAuthentication(shockz.msa.common.Constant.Authentication_Scheme_Bearer)
+  .AddJwtBearer(shockz.msa.common.Constant.Authentication_Scheme_Bearer, options =>
   {
-    options.Authority = "https://localhost:7072";
+    options.Authority = shockz.msa.common.Url.Identity_Server;
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
       ValidateAudience = false
@@ -24,8 +24,8 @@ builder.Services.AddAuthentication("Bearer")
 
 builder.Services.AddAuthorization(options =>
 {
-  options.AddPolicy("ClientIdPolicy", policy =>
-    policy.RequireClaim("client_id", "movieClient", "movies_mvc_client"));
+  options.AddPolicy(shockz.msa.common.Constant.Client_Id_Policy, policy =>
+    policy.RequireClaim(shockz.msa.common.Constant.Movies_Client_Id_Key, shockz.msa.common.Constant.Movies_Client_Id_Value));
 });
 
 var app = builder.Build();

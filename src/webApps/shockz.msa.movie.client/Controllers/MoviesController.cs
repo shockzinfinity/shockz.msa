@@ -14,22 +14,21 @@ namespace shockz.msa.movie.client.Controllers
   public class MoviesController : Controller
   {
     private readonly IMovieApiService _movieApiService;
+    private readonly IUserService _userService;
 
-    public MoviesController(IMovieApiService movieApiService)
+    public MoviesController(IMovieApiService movieApiService, IUserService userService)
     {
       _movieApiService = movieApiService ?? throw new ArgumentNullException(nameof(movieApiService));
+      _userService = userService ?? throw new ArgumentNullException(nameof(userService));
     }
 
     // GET: Movies
     public async Task<IActionResult> Index()
     {
-      //return _context.Movies != null ?
-      //            View(await _context.Movies.ToListAsync()) :
-      //            Problem("Entity set 'MovieContext.Movie'  is null.");
+      var movies = await _movieApiService.GetMovies();
+      movies = FilterMovies(movies.ToList());
 
-      await LogTokenAndClaims();
-
-      return View(await _movieApiService.GetMovies());
+      return View(movies);
     }
 
     public async Task LogTokenAndClaims()
@@ -52,19 +51,7 @@ namespace shockz.msa.movie.client.Controllers
     // GET: Movies/Details/5
     public async Task<IActionResult> Details(int? id)
     {
-      //if (id == null || _context.Movies == null) {
-      //  return NotFound();
-      //}
-
-      //var movie = await _context.Movies
-      //    .FirstOrDefaultAsync(m => m.Id == id);
-      //if (movie == null) {
-      //  return NotFound();
-      //}
-
-      //return View(movie);
-
-      return View();
+      return View(await _movieApiService.GetMovie(id.Value));
     }
 
     // GET: Movies/Create
@@ -78,32 +65,17 @@ namespace shockz.msa.movie.client.Controllers
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Title,Genre,Rating,ReleaseDate,ImageUrl,Owner")] Movie movie)
+    public async Task<IActionResult> Create([Bind(shockz.msa.common.Constant.Movies_Controller_Bind_Attribute)] Movie movie)
     {
-      //if (ModelState.IsValid) {
-      //  _context.Add(movie);
-      //  await _context.SaveChangesAsync();
-      //  return RedirectToAction(nameof(Index));
-      //}
-      //return View(movie);
+      await _movieApiService.CreateMovie(movie);
 
-      return View();
+      return RedirectToAction(shockz.msa.common.Constant.Movies_Controller_Action_Index);
     }
 
     // GET: Movies/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
-      //if (id == null || _context.Movies == null) {
-      //  return NotFound();
-      //}
-
-      //var movie = await _context.Movies.FindAsync(id);
-      //if (movie == null) {
-      //  return NotFound();
-      //}
-      //return View(movie);
-
-      return View();
+      return View(await _movieApiService.GetMovie(id.Value));
     }
 
     // POST: Movies/Edit/5
@@ -111,47 +83,22 @@ namespace shockz.msa.movie.client.Controllers
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Genre,Rating,ReleaseDate,ImageUrl,Owner")] Movie movie)
+    public async Task<IActionResult> Edit(int id, [Bind(shockz.msa.common.Constant.Movies_Controller_Bind_Attribute)] Movie movie)
     {
-      //if (id != movie.Id) {
-      //  return NotFound();
-      //}
+      var response = await _movieApiService.UpdateMovie(id, movie);
 
-      //if (ModelState.IsValid) {
-      //  try {
-      //    _context.Update(movie);
-      //    await _context.SaveChangesAsync();
-      //  }
-      //  catch (DbUpdateConcurrencyException) {
-      //    if (!MovieExists(movie.Id)) {
-      //      return NotFound();
-      //    } else {
-      //      throw;
-      //    }
-      //  }
-      //  return RedirectToAction(nameof(Index));
-      //}
-      //return View(movie);
-
-      return View();
+      if (response) {
+        return RedirectToAction(shockz.msa.common.Constant.Movies_Controller_Action_Index);
+      } else {
+        Debug.WriteLine($"An error occurred");
+        return View();
+      }
     }
 
     // GET: Movies/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
-      //if (id == null || _context.Movies == null) {
-      //  return NotFound();
-      //}
-
-      //var movie = await _context.Movies
-      //    .FirstOrDefaultAsync(m => m.Id == id);
-      //if (movie == null) {
-      //  return NotFound();
-      //}
-
-      //return View(movie);
-
-      return View();
+      return View(await _movieApiService.GetMovie(id.Value));
     }
 
     // POST: Movies/Delete/5
@@ -159,33 +106,25 @@ namespace shockz.msa.movie.client.Controllers
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-      //if (_context.Movies == null) {
-      //  return Problem("Entity set 'MovieContext.Movies'  is null.");
-      //}
-      //var movie = await _context.Movies.FindAsync(id);
-      //if (movie != null) {
-      //  _context.Movies.Remove(movie);
-      //}
+      var response = await _movieApiService.DeleteMovice(id);
 
-      //await _context.SaveChangesAsync();
-      //return RedirectToAction(nameof(Index));
-
-      return View();
-    }
-
-    private bool MovieExists(int id)
-    {
-      //return (_context.Movies?.Any(e => e.Id == id)).GetValueOrDefault();
-
-      return true;
+      if (response) {
+        return RedirectToAction(shockz.msa.common.Constant.Movies_Controller_Action_Index);
+      } else {
+        Debug.WriteLine($"An error occurred");
+        return View();
+      }
     }
 
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> OnlyAdmin()
     {
-      var userInfo = await _movieApiService.GetUserInfo();
+      await LogTokenAndClaims();
+      var userInfo = await _userService.GetUserInfo();
 
       return View(userInfo);
     }
+
+    private List<Movie> FilterMovies(List<Movie> movies) => movies.FindAll(m => m.Owner.Equals(User.Identity.Name, StringComparison.OrdinalIgnoreCase));
   }
 }

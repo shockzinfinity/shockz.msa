@@ -1,6 +1,4 @@
-﻿using IdentityModel.Client;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+﻿using shockz.msa.movie.client.Extensions;
 using shockz.msa.movie.client.Models;
 
 namespace shockz.msa.movie.client.Services
@@ -68,62 +66,59 @@ namespace shockz.msa.movie.client.Services
 
       #endregion test codes
 
-      var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-
-      //var movies = await httpClient.GetFromJsonAsync<IEnumerable<Movie>>("/api/movies/");
-      var movies = await httpClient.GetFromJsonAsync<IEnumerable<Movie>>("/movies");
+      var movies = await Get<List<Movie>>(shockz.msa.common.Url.Movies);
 
       return movies;
     }
 
-    public Task<Movie> GetMovie(int id)
+    public async Task<Movie> GetMovie(int id)
     {
-      throw new NotImplementedException();
+      var movie = await Get<Movie>(string.Format(shockz.msa.common.Url.Movies_Id, id));
+      return movie;
     }
 
-    public Task<Movie> CreateMovie(Movie movie)
+    public async Task<bool> CreateMovie(Movie movie)
     {
-      throw new NotImplementedException();
+      await Execute<Movie>(HttpMethod.Post, shockz.msa.common.Url.Movies, movie);
+
+      return true;
     }
 
-    public Task<Movie> UpdateMovie(Movie movie)
+    public async Task<bool> UpdateMovie(int id, Movie movie)
     {
-      throw new NotImplementedException();
+      await Execute<Movie>(HttpMethod.Put, string.Format(shockz.msa.common.Url.Movies_Id, id), movie);
+
+      return true;
     }
 
-    public Task DeleteMovice(int id)
+    public async Task<bool> DeleteMovice(int id)
     {
-      throw new NotImplementedException();
+      await Execute<Movie>(HttpMethod.Delete, string.Format(shockz.msa.common.Url.Movies_Id, id), default);
+
+      return true;
     }
 
-    public async Task<UserInfoViewModel> GetUserInfo()
+    private async Task<T> Get<T>(string url)
     {
-      var idpClient = _httpClientFactory.CreateClient("IDPClient");
-      var metaDataResponse = await idpClient.GetDiscoveryDocumentAsync();
-      if (metaDataResponse.IsError) {
-        throw new HttpRequestException("Something went wrong while requesting the access token");
+      return await Execute<T>(HttpMethod.Get, url, default);
+    }
+
+    private async Task<T> Execute<T>(HttpMethod method, string uri, T data)
+    {
+      var httpClient = _httpClientFactory.CreateClient(shockz.msa.common.Constant.Http_Client_Movies_Api);
+      var request = new HttpRequestMessage(method, uri);
+      if (method == HttpMethod.Post || method == HttpMethod.Put) {
+        request.SerializeData<T>(data);
       }
 
-      var accessToken = await _contextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+      var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+      response.EnsureSuccessStatusCode();
 
-      var userInfoResponse = await idpClient.GetUserInfoAsync(
-        new UserInfoRequest
-        {
-          Address = metaDataResponse.UserInfoEndpoint,
-          Token = accessToken
-        });
-
-      if (userInfoResponse.IsError) {
-        throw new HttpRequestException("Something went wrong while requesting the user info");
+      if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+        return await response.ReadContentAs<T>();
+      } else {
+        return default;
       }
-
-      var userInfoDictionary = new Dictionary<string, string>();
-
-      foreach (var claim in userInfoResponse.Claims) {
-        userInfoDictionary.Add(claim.Type, claim.Value);
-      }
-
-      return new UserInfoViewModel(userInfoDictionary);
     }
   }
 }

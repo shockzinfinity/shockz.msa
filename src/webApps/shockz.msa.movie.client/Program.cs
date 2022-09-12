@@ -11,24 +11,25 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMovieApiService, MovieApiService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddTransient<AuthenticationDelegatingHandler>();
 builder.Services
-  .AddHttpClient("MovieAPIClient", client =>
+  .AddHttpClient(shockz.msa.common.Constant.Http_Client_Movies_Api, client =>
   {
     //client.BaseAddress = new Uri("http://localhost:5256/"); // direct to api
-    client.BaseAddress = new Uri("http://localhost:5300/"); // via api gateway
+    client.BaseAddress = new Uri(shockz.msa.common.Url.Api_Gateway); // via api gateway
     client.DefaultRequestHeaders.Clear();
-    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+    client.DefaultRequestHeaders.Add(HeaderNames.Accept, shockz.msa.common.Constant.Content_Type_Json);
   })
   .AddHttpMessageHandler<AuthenticationDelegatingHandler>();
 
 builder.Services
-  .AddHttpClient("IDPClient", client =>
+  .AddHttpClient(shockz.msa.common.Constant.Http_Client_Idp, client =>
   {
-    client.BaseAddress = new Uri("https://localhost:7072/");
+    client.BaseAddress = new Uri(shockz.msa.common.Url.Identity_Server);
     client.DefaultRequestHeaders.Clear();
-    client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
+    client.DefaultRequestHeaders.Add(HeaderNames.Accept, shockz.msa.common.Constant.Content_Type_Json);
   });
 
 //builder.Services
@@ -51,22 +52,22 @@ builder.Services
   .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
   .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
   {
-    options.Authority = "https://localhost:7072";
+    options.Authority = shockz.msa.common.Url.Identity_Server;
 
-    options.ClientId = "movies_mvc_client";
-    options.ClientSecret = "secret";
+    options.ClientId = shockz.msa.common.Constant.Movies_Client_Id_Value;
+    options.ClientSecret = shockz.msa.common.Constant.Movies_Client_Secret;
 
     //options.ResponseType = OidcConstants.ResponseTypes.Code;
     options.ResponseType = OidcConstants.ResponseTypes.CodeIdToken; // hybrid
 
     //options.Scope.Add(OidcConstants.StandardScopes.OpenId); // auto included
     //options.Scope.Add(OidcConstants.StandardScopes.Profile); // auto included
-    options.Scope.Add("movieAPI");
+    options.Scope.Add(shockz.msa.common.Constant.Scope_Movie_Api_Value);
     options.Scope.Add(OidcConstants.StandardScopes.Address);
     options.Scope.Add(OidcConstants.StandardScopes.Email);
-    options.Scope.Add("roles");
+    options.Scope.Add(shockz.msa.common.Constant.Scope_Role_Value);
 
-    options.ClaimActions.MapUniqueJsonKey("role", "role");
+    options.ClaimActions.MapUniqueJsonKey(shockz.msa.common.Constant.Scope_Role_Value, shockz.msa.common.Constant.Scope_Role_Value);
 
     options.SaveTokens = true;
 

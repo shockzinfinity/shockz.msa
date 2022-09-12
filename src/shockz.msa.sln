@@ -74,6 +74,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shockz.msa.identityServer",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.movie.client", "webApps\shockz.msa.movie.client\shockz.msa.movie.client.csproj", "{C5517614-8A09-485D-81AC-66BBD5EF50B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{0DF2C8A2-4306-4AAD-B5F1-442F090E7E18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shockz.msa.common", "common\shockz.msa.common\shockz.msa.common.csproj", "{AC337393-143F-45F1-9072-FF83582BCF50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +172,10 @@ Global
 		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5517614-8A09-485D-81AC-66BBD5EF50B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC337393-143F-45F1-9072-FF83582BCF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC337393-143F-45F1-9072-FF83582BCF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC337393-143F-45F1-9072-FF83582BCF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC337393-143F-45F1-9072-FF83582BCF50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +208,7 @@ Global
 		{F58B35CF-4A91-4DD7-B75A-E401E94FCAED} = {9BB4484D-3E1A-4CEB-A4C0-45D81BF0695B}
 		{095D1ADC-7F4E-45F4-BF63-03153DDAEEBF} = {F549D090-02CC-4302-9611-172563BEACE1}
 		{C5517614-8A09-485D-81AC-66BBD5EF50B5} = {AAFFA8D4-B014-4AB8-BF91-B14B4BF35C23}
+		{AC337393-143F-45F1-9072-FF83582BCF50} = {0DF2C8A2-4306-4AAD-B5F1-442F090E7E18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F07C5C1-8F89-4D3B-9D6E-D39DD5DE9FB3}

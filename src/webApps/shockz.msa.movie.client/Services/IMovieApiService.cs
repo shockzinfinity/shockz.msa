@@ -6,9 +6,8 @@ namespace shockz.msa.movie.client.Services
   {
     Task<IEnumerable<Movie>> GetMovies();
     Task<Movie> GetMovie(int id);
-    Task<Movie> CreateMovie(Movie movie);
-    Task<Movie> UpdateMovie(Movie movie);
-    Task DeleteMovice(int id);
-    Task<UserInfoViewModel> GetUserInfo();
+    Task<bool> CreateMovie(Movie movie);
+    Task<bool> UpdateMovie(int id, Movie movie);
+    Task<bool> DeleteMovice(int id);
   }
 }
