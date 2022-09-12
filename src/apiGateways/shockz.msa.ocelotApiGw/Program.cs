@@ -16,11 +16,24 @@ builder.Host.ConfigureLogging(loggingBuilder =>
     options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
   });
 }).UseSerilog(SeriLogger.Configure);
+builder.Configuration.AddJsonFile(shockz.msa.common.Constant.Ocelot_Json_File_Name);
 // ocelot.Development.json or ocelot.Local.json
 builder.Configuration.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", true, true);
 //builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 //builder.Logging.AddConsole();
 //builder.Logging.AddDebug();
+var authenticationProviderKey = "IdentityApiKey";
+builder.Services
+  .AddAuthentication()
+  .AddJwtBearer(authenticationProviderKey, x =>
+  {
+    x.Authority = shockz.msa.common.Url.Identity_Server;
+    //x.RequireHttpsMetadata = false;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+      ValidateAudience = false
+    };
+  });
 
 builder.Services.AddOcelot().AddCacheManager(settings => settings.WithDictionaryHandle());
 

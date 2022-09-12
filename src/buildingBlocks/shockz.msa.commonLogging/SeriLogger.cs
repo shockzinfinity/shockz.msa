@@ -21,14 +21,14 @@ public static class SeriLogger
        .Enrich.WithCorrelationId()
        .WriteTo.Debug()
        .WriteTo.Console(outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} {TraceId} {Level:u3} {Message}{NewLine}{Exception}")
-       .WriteTo.Elasticsearch(
-         new ElasticsearchSinkOptions(new Uri(elasticUri))
-         {
-           IndexFormat = $"applogs-{context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLower().Replace(".", "-")}-logs-{DateTime.UtcNow:yyyy-MM}",
-           AutoRegisterTemplate = true,
-           NumberOfShards = 2,
-           NumberOfReplicas = 1
-         })
+       //.WriteTo.Elasticsearch(
+       //  new ElasticsearchSinkOptions(new Uri(elasticUri))
+       //  {
+       //    IndexFormat = $"applogs-{context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLower().Replace(".", "-")}-logs-{DateTime.UtcNow:yyyy-MM}",
+       //    AutoRegisterTemplate = true,
+       //    NumberOfShards = 2,
+       //    NumberOfReplicas = 1
+       //  })
        .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
        .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
        .Enrich.With<LogEnricher>()

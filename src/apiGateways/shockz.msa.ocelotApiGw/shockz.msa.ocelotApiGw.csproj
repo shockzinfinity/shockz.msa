@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Ocelot" Version="18.0.0" />
     <PackageReference Include="Ocelot.Cache.CacheManager" Version="18.0.0" />
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\buildingBlocks\shockz.msa.commonLogging\shockz.msa.commonLogging.csproj" />
+    <ProjectReference Include="..\..\common\shockz.msa.common\shockz.msa.common.csproj" />
   </ItemGroup>
 
 </Project>
