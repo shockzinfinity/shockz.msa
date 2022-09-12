@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "shockz.msa.ordering.domain": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:62461;http://localhost:62463"
+    }
+  }
+}
