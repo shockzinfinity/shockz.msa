@@ -28,6 +28,11 @@ builder.Services.AddAuthorization(options =>
     policy.RequireClaim(shockz.msa.common.Constant.Movies_Client_Id_Key, shockz.msa.common.Constant.Movies_Client_Id_Value));
 });
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+  builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
@@ -40,6 +45,8 @@ if (app.Environment.IsDevelopment()) {
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+app.UseCors("corsapp");
 
 app.UseAuthentication();
 app.UseAuthorization();
