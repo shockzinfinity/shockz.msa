@@ -79,7 +79,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://catalogdb:27017" # inner containers env, use 27017 port
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -96,7 +98,9 @@ services:
       - "CacheSettings:ConnectionString=basketdb:6379" # inner containers env, use 6379 port
       - "GrpcSettings:DiscountUrl=http://discount.grpc"
       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -110,7 +114,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User id=admin;Password=P@ssw0rd;"
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -123,7 +129,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User id=admin;Password=P@ssw0rd;"
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -137,7 +145,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=P@ssw0rd;"
       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -150,7 +160,9 @@ services:
     container_name: ocelotapigw
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -168,7 +180,9 @@ services:
       - "ApiSettings:CatalogUrl=http://catalog.api"
       - "ApiSettings:BasketUrl=http://basket.api"
       - "ApiSettings:OrderingUrl=http://ordering.api"
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -178,34 +192,36 @@ services:
     ports:
       - "8005:80"
 
-  elasticsearch:
-    container_name: elasticsearch
-    environment:
-      - xpack.monitoring.enabled=true
-      - xpack.watcher.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    ports:
-      - "9200:9200"
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-    # check url: localhost:9200, localhost:9200/_aliases, localhost:9200/products/_bulk, localhost:9200/products/_search
+  #elasticsearch:
+  #  container_name: elasticsearch
+  #  environment:
+  #    - xpack.monitoring.enabled=true
+  #    - xpack.watcher.enabled=false
+  #    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #    - discovery.type=single-node
+  #  ports:
+  #    - "9200:9200"
+  #  volumes:
+  #    - elasticsearch_data:/usr/share/elasticsearch/data
+  #  # check url: localhost:9200, localhost:9200/_aliases, localhost:9200/products/_bulk, localhost:9200/products/_search
 
-  kibana:
-    container_name: kibana
-    environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-    depends_on:
-      - elasticsearch
-    ports:
-      - "5601:5601"
+  #kibana:
+  #  container_name: kibana
+  #  environment:
+  #    - ELASTICSEARCH_URL=http://elasticsearch:9200
+  #  depends_on:
+  #    - elasticsearch
+  #  ports:
+  #    - "5601:5601"
 
   aspnetrunbasics:
     container_name: aspnetrunbasics
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ApiSettings:GatewayAddress=http://ocelotapigw"
-      - "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - "OpenTelmetry:Host=jaeger"
       - "OpenTelmetry:Port=6831"
     depends_on:
@@ -221,6 +237,9 @@ services:
     container_name: webstatus
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
       - HealthChecksUI__HealthChecks__0__Name=Catalog Health Check
       - HealthChecksUI__HealthChecks__0__Uri=http://catalog.api/hc
       - HealthChecksUI__HealthChecks__1__Name=Basket Health Check
@@ -260,6 +279,9 @@ services:
     container_name: filemanagement
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "ElasticConfiguration:Uri=https://10.10.10.50:9200"
+      - "ElasticConfiguration:Username=elastic"
+      - "ElasticConfiguration:Password=elastic1!"
     ports:
       - "8008:80"
     volumes:

@@ -67,11 +67,11 @@ services:
       context: .
       dockerfile: apiGateways/shockz.msa.shopping.Aggregator/Dockerfile
 
-  elasticsearch:
-    image: elasticsearch:7.17.2 # not support latest tag
+  #elasticsearch:
+  #  image: elasticsearch:7.17.2 # not support latest tag
 
-  kibana:
-    image: kibana:7.17.2 # not support latest tag
+  #kibana:
+  #  image: kibana:7.17.2 # not support latest tag
 
   aspnetrunbasics:
     image: ${DOCKER_REGISTRY-}aspnetrunbasics
@@ -100,6 +100,6 @@ volumes:
   postgres_data:
   pgadmin_data:
   mssql_data:
-  elasticsearch_data:
+  #elasticsearch_data:
   jaeger-data:
   tusfile-data:
