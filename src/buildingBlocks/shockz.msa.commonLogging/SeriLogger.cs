@@ -30,7 +30,7 @@ public static class SeriLogger
            //ModifyConnectionSettings = x => x.BasicAuthentication(elasticUser, elasticPassword),
            ModifyConnectionSettings = x =>
              x.ConnectionLimit(-1)
-              //.BasicAuthentication(elasticUser, elasticPassword)
+              .BasicAuthentication(elasticUser, elasticPassword)
               .ServerCertificateValidationCallback((source, certificate, chain, sslPolicyErrors) => { return true; }),
            FailureCallback = x => Debug.WriteLine(x),
            IndexFormat = $"ecommerce-{context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLower().Replace(".", "-")}-logs-{DateTime.UtcNow:yyyy-MM}",
