@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using shockz.msa.commonLogging;
 using shockz.msa.movie.api.Data;
 using shockz.msa.movie.api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(SeriLogger.Configure);
 builder.Services.AddDbContext<MoviesAPIContext>(options => options.UseInMemoryDatabase("Movies"));
 
 // Add services to the container.

@@ -27,20 +27,24 @@ public static class SeriLogger
        .WriteTo.Elasticsearch(
          new ElasticsearchSinkOptions(new Uri(elasticUri))
          {
-           //ModifyConnectionSettings = x => x.BasicAuthentication(elasticUser, elasticPassword),
+           IndexFormat = $"ecommerce-{context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLower().Replace(".", "-")}-logs-{DateTime.UtcNow:yyyy-MM}",
+           AutoRegisterTemplate = true,
+           AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+           TypeName = null,
+           FailureCallback = x => Console.WriteLine(x),
            ModifyConnectionSettings = x =>
              x.ConnectionLimit(-1)
               .BasicAuthentication(elasticUser, elasticPassword)
               .ServerCertificateValidationCallback((source, certificate, chain, sslPolicyErrors) => { return true; }),
-           FailureCallback = x => Debug.WriteLine(x),
-           IndexFormat = $"ecommerce-{context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-")}-{context.HostingEnvironment.EnvironmentName?.ToLower().Replace(".", "-")}-logs-{DateTime.UtcNow:yyyy-MM}",
-           AutoRegisterTemplate = true,
            NumberOfShards = 2,
-           NumberOfReplicas = 1
+           NumberOfReplicas = 1,
+           BatchAction = ElasticOpType.Create
          })
        .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
        .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
        .Enrich.With<LogEnricher>()
        .ReadFrom.Configuration(context.Configuration);
+
+     Serilog.Debugging.SelfLog.Enable(message => Console.WriteLine(message));
    };
 }
