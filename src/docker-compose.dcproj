@@ -10,9 +10,15 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.debug.yml">
-	  <DependentUpon>docker-compose.yml</DependentUpon>
-	</None>
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
     <None Include="docker-compose.override.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
+    <None Include="docker-compose.99.override.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
+    <None Include="docker-compose.99.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.yml" />

@@ -1,0 +1,75 @@
+version: '3.4'
+
+services:
+  catalogdb:
+    image: mongo
+
+  # basketdb:
+  #   image: redis:alpine
+
+  discountdb:
+    image: postgres
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+
+  mongoclient:
+    image: mongoclient/mongoclient
+
+  portainer:
+    image: portainer/portainer-ce
+
+  pgadmin:
+    image: dpage/pgadmin4
+    
+  catalog.api:
+    image: registry.aegisk.com/ecommerce-msa/catalogapi
+
+  basket.api:
+    image: registry.aegisk.com/ecommerce-msa/basketapi
+
+  discount.api:
+    image: registry.aegisk.com/ecommerce-msa/discountapi
+
+  discount.grpc:
+    image: registry.aegisk.com/ecommerce-msa/discountgrpc
+
+  ordering.api:
+    image: registry.aegisk.com/ecommerce-msa/orderingapi
+
+  ocelotapigw:
+    image: registry.aegisk.com/ecommerce-msa/ocelotapigw
+
+  shopping.aggregator:
+    image: registry.aegisk.com/ecommerce-msa/shoppingaggregator
+
+    #  elasticsearch:
+    #image: elasticsearch:7.17.2 # not support latest tag
+
+    # kibana:
+    #image: kibana:7.17.2 # not support latest tag
+
+  aspnetrunbasics:
+    image: registry.aegisk.com/ecommerce-msa/aspnetrunbasics
+
+  webstatus:
+    image: registry.aegisk.com/ecommerce-msa/webstatus
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+
+  filemanagement:
+    image: registry.aegisk.com/ecommerce-msa/filemanagement
+
+volumes:
+  mongo_data:
+  portainer_data:
+  postgres_data:
+  pgadmin_data:
+  mssql_data:
+    #  elasticsearch_data:
+  jaeger-data:
+  tusfile-data:
